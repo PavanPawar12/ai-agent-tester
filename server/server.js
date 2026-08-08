@@ -25,9 +25,18 @@ import chatRoutes from './src/routes/chat.routes.js';
 
 const app = express();
 
-app.use(cors());
+app.use(app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+  })
+));
 app.use(express.json());
-
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "AgentForge API is running 🚀",
+  });
+});
 const PORT = process.env.PORT || 5000;
 
 console.log(
